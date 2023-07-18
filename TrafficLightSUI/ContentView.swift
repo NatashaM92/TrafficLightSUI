@@ -8,19 +8,58 @@
 import SwiftUI
 
 struct ContentView: View {
-    var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
-        }
-        .padding()
-    }
+	
+	@State private var count = 0
+	@State private var redOpacity = 0.3
+	@State private var yellowOpacity = 0.3
+	@State private var greenOpacity = 0.3
+	@State private var title = "Start"
+	
+	var body: some View {
+		ZStack {
+			Color.black
+				.ignoresSafeArea()
+			VStack(spacing: 20) {
+				ColorCircleView(color: .red, opacity: redOpacity)
+				ColorCircleView(color: .yellow, opacity: yellowOpacity)
+				ColorCircleView(color: .green, opacity: greenOpacity)
+				Spacer()
+				
+				Button(action: { tapButton() }) {
+					Text(title)
+						.foregroundColor(.white)
+						.padding(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16))
+						.font(.title)
+						.background(Color.blue)
+						.cornerRadius(10)
+						.overlay(RoundedRectangle(cornerRadius: 10).stroke(Color.white, lineWidth: 4))
+				}
+			}
+			.padding(EdgeInsets(top: 50, leading: 0, bottom: 50, trailing: 0))
+		}
+	}
+	
+	private func tapButton(){
+		title = "Next"
+		
+		if redOpacity != 1 && yellowOpacity != 1 {
+			redOpacity = 1
+			greenOpacity = 0.3
+			
+		} else if yellowOpacity != 1 {
+			redOpacity = 0.3
+			yellowOpacity = 1
+			
+		} else if greenOpacity != 1 {
+			yellowOpacity = 0.3
+			greenOpacity = 1
+			
+		}
+	}
 }
 
 struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-    }
+	static var previews: some View {
+		ContentView()
+	}
 }
