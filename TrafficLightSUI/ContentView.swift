@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct ContentView: View {
-	
-	@State private var count = 0
+
 	@State private var redOpacity = 0.3
 	@State private var yellowOpacity = 0.3
 	@State private var greenOpacity = 0.3
+	
 	@State private var title = "Start"
 	
 	var body: some View {
@@ -25,15 +25,7 @@ struct ContentView: View {
 				ColorCircleView(color: .green, opacity: greenOpacity)
 				Spacer()
 				
-				Button(action: { tapButton() }) {
-					Text(title)
-						.foregroundColor(.white)
-						.padding(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16))
-						.font(.title)
-						.background(Color.blue)
-						.cornerRadius(10)
-						.overlay(RoundedRectangle(cornerRadius: 10).stroke(Color.white, lineWidth: 4))
-				}
+				ButtonView(action: { tapButton() }, title: title )
 			}
 			.padding(EdgeInsets(top: 50, leading: 0, bottom: 50, trailing: 0))
 		}
